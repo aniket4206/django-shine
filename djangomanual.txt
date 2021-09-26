@@ -1,0 +1,69 @@
+1)firstly i have created django project name as shine
+ex: django-admin startproject shine
+
+Note: when you used linux not necessary create virtual environment for django project but you used windows you must create django virtual environment fromrunning django application.
+you have not used virtal environment you get some error like djano-admin not found or other.
+
+2)then i have created app file for project like:
+	python3 manage.py startapp shinelaundry
+
+3)then edit urls.py file in django project to the placed in shine 		directory
+	from django.contrib import admin
+	from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('shinelaundry.urls'))
+]
+
+Add these lines
+
+Note: shinelaundry is the project app name
+when you enter localhost link it will goes through shinelaundry index file.
+
+4)create file urls.py in shinelaundry folder projectAppfolder.
+
+	from django.contrib import admin
+from django.urls import path,include
+from shinelaundry import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='shinelaundry')
+]
+
+
+Add these lines 
+
+5)in the views.py write the code as given:
+
+from django.shortcuts import render,HttpResponse
+
+
+def index(request):
+    return render(request, 'index.html')
+    
+Note : index.html is the main page of our project which is located in templates folder
+
+6)create templates and static folder is outside the app folder
+like /shine/templates  orr /shine/static
+
+7)change setting.py file as:
+
+a)For static folder
+	STATIC_URL = '/static/'
+
+	STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+	
+b) for template folder:
+	'DIRS': [os.path.join(BASE_DIR, "templates")],	
+	edit dirs in templates section
+
+8)put only html files in templates folder
+
+9)put assets and css files in static folder
+
+10){% load static %}
+include after the assets folder
+https://studygyaan.com/django/how-to-integrate-bootstrap-4-template-in-django
+
